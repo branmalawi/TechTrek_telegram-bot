@@ -30,23 +30,28 @@ const searchResultFilter = (data, page) => {
     );
 
     let submodel = "";
-    const laptopFiltered = [];
+    const laptopFilteredAll = [];
 
     laptops.forEach(laptop => {
         const model_name = laptop.model_info[0].name;
         const submodel_name = laptop.model_info[0].submodel_info[0];
-        const laptop_name = `${model_name} ${submodel_name}`;
+        const laptop_name = `${model_name} (${submodel_name} )`;
         const laptop_id = laptop.model_info[0].id;
         if (laptop_name != submodel) {
             submodel = laptop_name;
-            laptopFiltered.push({name: laptop_name, id: laptop_id});
+            laptopFilteredAll.push({ name: laptop_name, id: laptop_id });
         }
     });
 
     const page_start = (page - 1) * 10;
     const page_end = page * 10;
+    const allPage = Math.ceil(laptopFilteredAll.length / 10);
 
-    return laptopFiltered.slice(page_start, page_end);
+    const laptopFiltered = laptopFilteredAll.slice(page_start, page_end);
+
+    laptopFiltered.push({ page_prev: page - 1, page_now: page, page_next: page + 1, pages: allPage });
+
+    return laptopFiltered;
 };
 
 export { getParameter, searchResultFilter };
