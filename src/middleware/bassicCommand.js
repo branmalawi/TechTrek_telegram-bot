@@ -3,7 +3,7 @@ const start = (ctx) => {
 }
 
 const help = (ctx) => {
-  ctx.reply('how can i hel you?')
+  ctx.reply('how can i help you?')
 }
 
 export { start, help };
