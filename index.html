@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" charset="utf-8">
+    // Buat permintaan ke halaman web
+const url = 'https://laptopmedia.com/laptop-specs/asus-tuf-gaming-f15-2038/';
+fetch(url, {mode : "no-cors"})
+  .then(response => response.text())
+  .then(html => {
+    // Buat elemen HTML sementara untuk manipulasi DOM
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+
+    // Contoh: Ekstrak teks dari elemen dengan ID tertentu
+    const extractedData = tempDiv.querySelector('#idElemen').textContent;
+console.log(response);
+    // Gunakan data yang diekstrak
+    //console.log('Data yang diekstrak:', extractedData);
+  })
+  .catch(error => console.error('Terjadi kesalahan:', error));
+  
+  </script>
+</body>
+</html>

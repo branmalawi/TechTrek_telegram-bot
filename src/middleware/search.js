@@ -1,14 +1,18 @@
 import { searchHandler } from "../utils/searchUtils.js";
 
-export const search = ctx => {
+export const search = async ctx => {
     const rawMessage = ctx.message.text;
     const extractQuery = rawMessage.match(/\/search\s+(.+)/);
-
     if (extractQuery) {
-        ctx.query = extractQuery[1];
-    } else {
-        ctx.reply("maaf format penulisan anda salah");
-    }
-
+        const resolve = await ctx.reply("sedang melakukan pencarian");
+        ctx.state.chat_id = resolve.chat.id;
+        ctx.state.message_id = resolve.message_id;
+        ctx.state.query = extractQuery[1];
     searchHandler(ctx);
+    } else {
+        ctx.reply(
+            `tolong sertakan keyword pencariannya, contoh :
+/search Lenovo`
+        );
+    }
 };
